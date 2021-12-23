@@ -1,26 +1,35 @@
 import { render } from '@testing-library/react';
 import React, {useState,useEffect}from'react';
 import Counter from './componets/Counter.js';
+import Movie from './componets/Movie.js';
+import MovieForm from './componets/MovieForm';
 function App() {
-  const[buttonName, setButtonName]= useState('클릭');
-  const [condition, setCondition]= useState(false);
-  const toggle=()=>{
-    setCondition(!condition);
+  const [movies,setMovies]= useState([]);
+  const removeMovie=(id)=>{
+    setMovies(movies.filter(movie=>{
+      return movie.id!==id;
+    }))
   };
-  useEffect(()=>{
-    console.log(condition);
-  },[condition]);
-  const renderCondition=(condition
-  ?'TRUE'
-  :'FALSE');
+  const renderMovies = movies.length?movies.map(movie =>{
+    return(
+      <Movie
+      movie={movie}
+      key={movie.id}
+      removeMovie={removeMovie}
+      />
+    );
+  }):'추가된 영화가 없습니다.';
+  const addMovie=(movie)=>{
+    setMovies([
+      ...movies,
+      movie
+    ]);
+  };
    return(
-   <div class="App">
-   <h1>Kossi coder</h1>
-  <Counter click="click1"/>
-  <Counter click={buttonName}/>
-  <Counter/>
-  <div>  {renderCondition}</div>
-  <button onClick={toggle}>toggle</button>
+   <div className="App">
+   <h1>movie List</h1>
+   <MovieForm addMovie={addMovie}/>
+   {renderMovies}
   </div>
  );
 }
