@@ -4,6 +4,7 @@ import Counter from './componets/Counter.js';
 import Movie from './componets/Movie.js';
 import MovieForm from './componets/MovieForm';
 import Navbar from './componets/Navbar';
+import Users from './pages/Users';
 import { BrowserRouter,Route, Link,Switch,Routes } from "react-router-dom"
 function App() {
   const [movies,setMovies]= useState([]);
@@ -31,21 +32,23 @@ function App() {
      <BrowserRouter>
       <div className="App">
         <Navbar />
-        <Switch>
-          <Route path="/movies">
-              <h1>Movie list</h1>
-              <MovieForm addMovie={addMovie} />
-              {renderMovies}
-          </Route>
+        <div className='container'>
+          <Switch>
+            <Route path="/movies">
+                <h1>Movie list</h1>
+                <MovieForm addMovie={addMovie} />
+                {renderMovies}
+            </Route>
 
-          <Route path="/users">
-              <h1>Users</h1>
-          </Route>
+            <Route path="/users">
+              <Users/>
+            </Route>
 
-          <Route path="/">
+            <Route path="/">
               <h1>Home</h1>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </div>
     </div>
   </BrowserRouter>
  );
