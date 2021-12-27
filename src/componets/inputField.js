@@ -8,7 +8,7 @@ const InputField=({
     errorMessage
     })=>{
     return(
-    <div>
+    <>
         <input
             style={{borderColor:'red'}}
             type={type}
@@ -17,7 +17,7 @@ const InputField=({
             onChange={onChange}
         ></input><br/>
         <div style={{color:'red'}}>{errorMessage}</div>
-    </div>
+    </>
     );
 };
 
